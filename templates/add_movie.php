@@ -61,32 +61,6 @@ $main = function () {
 
 <?php
 };
-?>
-
-<?php
-$script = function () {
-?>
-  <script>
-    $(document).ready(function() {
-      $('#rating-input').change(function() {
-        $('#rating-val').text(this.value)
-      });
-    });
-    // const observerCallback = (mutationList, observer) => {
-    //   console.log("this");
-    // }
-    // const observer = new MutationObserver(observerCallback)
-    // observer.observe(
-    //   document.querySelector("#rating-input"),
-    //   {
-    //     childList: false,
-    //     attributes: true,
-    //     subtree: false
-    //   }
-    // )
-  </script>
-<?php
-};
 
 require("master.php");
 ?>
