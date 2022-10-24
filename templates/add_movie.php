@@ -64,7 +64,6 @@ class addMovieLayout extends masterLayout
     </div>
 
 <?php
+  }
 }
-
-require("master.php");
 ?>
