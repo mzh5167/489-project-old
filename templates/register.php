@@ -6,28 +6,32 @@ class registerLayout extends masterLayout
   function main()
   {
 ?>
-    <div class="container" style="max-width: var(--breakpoint-md);">
+    <form action="" method="post" class="container" style="max-width: var(--breakpoint-md);">
       <div class="card">
         <h4 class="card-header">Register</h4>
         <div class="card-body">
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputEmail_">First name</label>
-              <input type="text" class="form-control" id="inputEmail_">
+              <input type="text" class="form-control" id="inputEmail_" name="fName">
             </div>
             <div class="form-group col-md-6">
               <label for="inputPassword4">Last name</label>
-              <input type="text" class="form-control" id="inputPassword4">
+              <input type="text" class="form-control" id="inputPassword4" name="lName">
             </div>
           </div>
           <div class="form-group">
+            <label for="email-input">E-mail</label>
+            <input class="form-control" type="email" id="email-input" name="email" autocomplete="off">
+          </div>
+          <div class="form-group">
             <label for="bday-input">Birthday</label>
-            <input class="form-control" type="date" name="bday" id="bday-input">
+            <input class="form-control" type="date" id="bday-input" name="birthday">
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="pass-input">Password</label>
-              <input type="password" class="form-control" id="pass-input">
+              <input type="password" class="form-control" id="pass-input" name="password">
             </div>
             <div class="form-group col-md-6">
               <label for="pass-conf">Confirm password</label>
@@ -48,7 +52,7 @@ class registerLayout extends masterLayout
           </div>
         </div>
       </div>
-    </div>
+    </form>
 
 <?php
   }
