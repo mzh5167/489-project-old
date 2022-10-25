@@ -12,17 +12,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $_POST["email"]
     ]);
     if ($query->rowCount() === 0) {
-      die("email not found");
+      $page = new loginLayout();
+      $page->alert_message = "Email not found";
+      $page->doc();
+      die();
     }
 
     $row = $query->fetch();
-    // print_r($row);
     $hash = $row->hash;
-    // print_r($hash);
-    // echo '<br>', ($hash ?? "not defined");
 
-    echo '<br><br>';
-    echo (password_verify($_POST["password"], $hash)) ? "success" : "failure";
+    // TODO: Redirect to home page when users signs in
+    $page = new loginLayout();
+    $page->alert_message =
+      (password_verify($_POST["password"], $hash) ? "Successfully logged in" : "Failed to log in")
+      . " $_POST[email]";
+    $page->doc();
   } catch (PDOException $e) {
     die($e->getMessage());
   }

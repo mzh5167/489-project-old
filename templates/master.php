@@ -11,9 +11,9 @@
  */
 abstract class masterLayout
 {
-  protected $title = "Default title";
-  protected $meta = "";
-  protected $alert_message = "";
+  public $title = "Default title";
+  public $meta = "";
+  public $alert_message = "";
   abstract protected function main();
 
   protected function script()
