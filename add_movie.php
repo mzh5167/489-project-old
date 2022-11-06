@@ -1,5 +1,6 @@
 <?php
 
+require("util/time.php");
 require("util/connection.php");
 require("templates/add_movie.php");
 
@@ -8,9 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   try {
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 
-    if (preg_match('/^(\d{1,2}):(\d{2})$/', $_POST["duration"], $matches)) {
-      $duration = ($matches[1] * 60) + $matches[2];
-    } else {
+    $duration = durationToSeconds($_POST["duration"]);
+    if ($duration == null) {
       $page = new addMovieLayout();
       $page->alert_message = "Invalid duration format";
       $page->doc();
