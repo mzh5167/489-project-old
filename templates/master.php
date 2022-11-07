@@ -24,50 +24,75 @@ abstract class masterLayout
   }
   private static function navbar()
   {
-  ?>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    session_start();
+?>
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+      <a class="navbar-brand" href="index.php">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <!-- <li class="nav-item active">
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
+          <li class="nav-item"> <a class="nav-link" href="#">Features</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-          </li>
+            <a class="nav-link" href="#">Pricing</a>
+          </li> -->
+
+          <!-- Ensure user is not admin -->
+          <?php if (!isset($_SESSION['isAdmin']) || !$_SESSION['isAdmin']) { ?>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                Browse Movies
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">New Arrival</a>
+                <a class="dropdown-item" href="#">Coming Soon</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                Manage Bookings
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Current Bookings</a>
+                <a class="dropdown-item" href="#">Booking history</a>
+              </div>
+            </li>
+          <?php } ?>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <ul class="navbar-nav ml-auto">
+          <?php if (isset($_SESSION["userId"])) { ?>
+            <li class="nav-item">
+              <a href="logout.php" class="nav-link">Log Out</a>
+            </li>
+            <?php if (!$_SESSION['isAdmin']) { ?>
+              <li class="nav-item">
+                <!-- <a href="#" class="nav-link"><i class="bi bi-person-circle"></i></a> -->
+                <!-- <a href="#" class="nav-link px-0 bi bi-person-circle"></a> -->
+                <!-- <a href="#" class="nav-brand"><i class="bi bi-person-circle"></i></a> -->
+                <a href="edit_profile.php" class="d-none d-md-block nav-link py-0 align-middle" style="font-size: 1.7rem;"><i class="d-inline-block bi bi-person-circle" width="25px"></i></a>
+                <a href="edit_profile.php" class="d-md-none nav-link">Edit Profile</a>
+              </li>
+            <?php } ?>
+          <?php } else { ?>
+            <li class="nav-item"> <a href="login.php" class="nav-link">Log in</a> </li>
+            <li class="nav-item"> <a href="register.php" class="nav-link">Register</a> </li>
+          <?php } ?>
+        </ul>
       </div>
     </nav>
 
 
-<?php
+  <?php
   }
 
   public function doc()
   {
-?>
+  ?>
 
     <!doctype html>
     <html lang="en">
@@ -83,6 +108,9 @@ abstract class masterLayout
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
       <!-- <link rel="stylesheet" href="../custom.css"> -->
+
+      <!-- Bootstrap Icons -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
       <title><?= $this->title ?></title>
       <?php
@@ -116,8 +144,7 @@ abstract class masterLayout
     </body>
 
     </html>
-  <?php
+<?php
   }
-
 }
 ?>
