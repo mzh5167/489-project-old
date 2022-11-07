@@ -13,7 +13,7 @@ class addMovieLayout extends masterLayout
   {
 ?>
     <div class="container" style="max-width: var(--breakpoint-md);">
-      <form method="post">
+      <form method="post" enctype="multipart/form-data">
         <div class="card">
           <h4 class="card-header">Add movie</h4>
           <div class="card-body">
@@ -68,6 +68,17 @@ class addMovieLayout extends masterLayout
             <div class="form-group">
               <label for="movie-desc">Description</label>
               <textarea class="form-control" name="desc" id="movie-desc" cols="30" rows="10"></textarea>
+            </div>
+            <!-- <div class="custom-file">
+              <input type="file" class="custom-file-input" id="customFile">
+              <label class="custom-file-label" for="customFile">Choose file</label>
+            </div> -->
+            <div class="form-group custom-file mb-3">
+              <!-- MAX_FILE_SIZE must precede the file input field -->
+              <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
+              <!-- Name of input element determines name in $_FILES array -->
+              <input type="file" name="poster-img" class="custom-file-input" id="poster-input" required>
+              <label class="custom-file-label" for="poster-input">Choose movie poster...</label>
             </div>
             <div class="form-group">
               <button type="submit" class="btn btn-primary">Add movie</button>
