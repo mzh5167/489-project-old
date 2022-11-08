@@ -1,15 +1,33 @@
 <?php
+
+require("util/connection.php");
 require("templates/movie_details.php");
 
-$page = new movieDetailsLayout(
- "Black Adam",
- "Nearly 5,000 years after he was bestowed with the almighty powers of the Egyptian gods -- and imprisoned just as quickly -- Black Adam is freed from his earthly tomb, ready to unleash his unique form of justice on the modern world.",
- "124",
- "English",
- "2017",
- "BLACK-ADAM-1-1.jpg"
-);
+try {
+  if ($_SERVER["REQUEST_METHOD"] !== "GET" || !isset($_GET["id"])) {
+    die("No ID was provided");
+  }
+  $id = $_GET["id"];
+  $query = $db->prepare(
+    "SELECT title, releaseYear, lang, duration, rating, genre, `desc`
+     FROM movies
+     WHERE id=?"
+  );
+  $query->execute([$id]);
+  if ($query->rowCount() == 0) {
+    die("invalid id");
+  }
+  $row = $query->fetch();
 
-$page->doc();
-
-?>
+  $page = new movieDetailsLayout(
+    $row['title'],
+    $row['desc'],
+    $row['duration'],
+    $row['lang'],
+    $row['releaseYear'],
+    "assets/posters/$id.jpg"
+  );
+  $page->doc();
+} catch (PDOException $e) {
+  die($e->getMessage());
+}

@@ -1,5 +1,6 @@
 <?php
 require("master.php");
+require("util/time.php");
 
 function consoleLog($msg)
 {
@@ -10,16 +11,16 @@ class movieDetailsLayout extends masterLayout
 {
   private $movie_title;
   private $desc;
-  private $length;
+  private $duration;
   private $lang;
   private $releaseYear;
   public $imageLink;
 
-  function __construct($movie_title, $desc, $length, $lang, $releaseYear, $imageLink)
+  function __construct($movie_title, $desc, $duration, $lang, $releaseYear, $imageLink)
   {
     $this->movie_title = $movie_title;
     $this->desc = $desc;
-    $this->length = $length;
+    $this->duration = $duration;
     $this->lang = $lang;
     $this->releaseYear = $releaseYear;
     $this->imageLink = $imageLink;
@@ -36,7 +37,7 @@ class movieDetailsLayout extends masterLayout
         <h2 class="text-capitalize text-center"> <?= $this->movie_title ?> </h2>
         <div class="text-muted text-center mb-5 row">
           <p class="col-4"><?= $this->lang ?></p>
-          <p class="col-4">2:04</p>
+          <p class="col-4"><?= minutesToDuration($this->duration) ?></p>
           <p class="col-4"><?= $this->releaseYear ?></p>
         </div>
 
