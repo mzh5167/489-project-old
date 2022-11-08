@@ -15,7 +15,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['poster-img'])) {
       $file = $_FILES['poster-img'];
       if ($file['error'] != UPLOAD_ERR_OK) {
-        die("file was not uploaded properly");
+        if ($file['error'] == UPLOAD_ERR_FORM_SIZE)
+          die("you have exceeded maximum size");
+        echo "error: $file[error] <br>";
+        print_r($_FILES);
+        die("<br> file was not uploaded properly");
+      }
+
+      $accepted_types = ["image/png", "image/jpeg"];
+      $type = mime_content_type($file['tmp_name']);
+      if (!in_array($type, $accepted_types)) {
+        die("Please upload an image not '$type'");
       }
 
       $target = "$posters_dir/" . basename($file['name']);
