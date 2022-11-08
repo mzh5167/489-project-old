@@ -75,7 +75,7 @@ class addMovieLayout extends masterLayout
             </div> -->
             <div class="form-group custom-file mb-3">
               <!-- MAX_FILE_SIZE must precede the file input field -->
-              <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
+              <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
               <!-- Name of input element determines name in $_FILES array -->
               <input type="file" name="poster-img" class="custom-file-input" id="poster-input" required>
               <label class="custom-file-label" for="poster-input">Choose movie poster...</label>
@@ -88,6 +88,36 @@ class addMovieLayout extends masterLayout
       </form>
     </div>
 
+  <?php
+  }
+
+  function script()
+  {
+  ?>
+    <script>
+      function setFilename(elem) {
+        if (elem.files.length == 0) return
+        var fileName = elem.files[0].name;
+        var nextSibling = elem.nextElementSibling
+
+        nextSibling.innerText = fileName
+      }
+      // $(document).ready(() => [...document.querySelectorAll('.custom-file-input')].forEach(element => {
+      //   setFilename(element);
+      // }));
+      $(document).ready(() => {
+        // [...$('.custom-file-input')].forEach(
+        //   element => setFilename(element)
+        // )
+        $('.custom-file-input')
+          .change(e => setFilename(e.target))
+          .change()
+      });
+      // document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+      //   // var fileName = document.getElementById("poster-input").files[0].name;
+      //   setFilename(e.target)
+      // })
+    </script>
 <?php
   }
 }
