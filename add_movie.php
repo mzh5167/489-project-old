@@ -9,8 +9,7 @@ $posters_dir = "assets/posters";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // TODO: input validation
   try {
-    $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-
+    // Duration format conversion
     $duration = durationToSeconds($_POST["duration"]);
     if ($duration == null) {
       $page = new addMovieLayout();
@@ -21,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $db->beginTransaction();
 
+    // Insert movie into database
     $query = $db->prepare("INSERT INTO `movies`(title, releaseYear, lang, duration, rating, genre, `desc`)
       VALUES (?, ?, ?, ?, ?, ?, ?)");
     $status = $query->execute([
@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $_POST["desc"]
     ]);
 
+    // Retrieve id
     $movie_id = $db
       ->query("SELECT LAST_INSERT_ID() AS id")
       ->fetch(PDO::FETCH_ASSOC)['id'];
@@ -43,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Image upload
     if (isset($_FILES['poster-img'])) {
       $file = $_FILES['poster-img'];
+      // Check for error
       if ($file['error'] != UPLOAD_ERR_OK) {
         if ($file['error'] == UPLOAD_ERR_FORM_SIZE)
           die("you have exceeded maximum size");
@@ -51,12 +53,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("<br> file was not uploaded properly");
       }
 
+      // Ensure type is valid
       $accepted_types = ["image/png", "image/jpeg"];
       $type = mime_content_type($file['tmp_name']);
       if (!in_array($type, $accepted_types)) {
         die("Please upload an image not '$type'");
       }
 
+      // Move file
       $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
       $target = "$posters_dir/$movie_id.$ext";
       if (move_uploaded_file($file['tmp_name'], $target)) {
