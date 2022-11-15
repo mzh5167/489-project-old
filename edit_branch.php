@@ -4,23 +4,8 @@ require("util/connection.php");
 require("templates/edit_branch.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  die();
-  try {
-    $query = $db->prepare(
-      "INSERT INTO `branches`(`name`, addr)
-       VALUES (?,?)"
-    );
-    $status = $query->execute([
-      $_POST["name"],
-      $_POST["addr"]
-    ]);
-
-    $page = new addBranchLayout();
-    $page->alert_message = $status ? "Branch was added successfully" : "Failed to add branch";
-    $page->doc();
-  } catch (PDOException $e) {
-    die($e->getMessage());
-  }
+  // TODO
+  die("Not implemented");
 } else {
   if (!isset($_GET["id"]))
     die("No id was provided");
@@ -34,10 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $query->execute([
       $_GET["id"]
     ]);
-    // Ensure id exists
+    // TODO: Ensure id exists
     $result = $query->fetch();
 
-    $page = new editBranchLayout($result["name"], $result["addr"]);
+    $page = new editBranchLayout();
+    $page->setValues($result);
     $page->doc();
   } catch (PDOException $e) {
     die($e->getMessage());
