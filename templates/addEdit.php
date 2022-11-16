@@ -12,6 +12,7 @@ trait addEdit
   {
     $this->values = $values;
     $this->isAdd = empty($values);
+    return $this;
   }
   protected function insVal($value)
   {

@@ -2,7 +2,7 @@
 
 require("util/connection.php");
 require("util/queries.php");
-require("templates/add_hall.php");
+require("templates/add_edit_hall.php");
 
 try {
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -31,7 +31,8 @@ try {
 
   // TODO: add an option to preselect hall letter if a branchId is passed with GET
   //       and preselect the correspondent branch
-  $page = new addHallLayout($branches);
+  $page = (new addEditHallLayout())
+    ->setBranches($branches);
   if (isset($alert_message))
     $page->alert_message = $alert_message;
   $page->doc();
