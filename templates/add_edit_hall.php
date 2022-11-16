@@ -39,7 +39,7 @@ class addEditHallLayout extends masterLayout
                 <?php } ?>
               </select>
             <?php } else { ?>
-              <input disabled type="text" class="form-control" id="branch-input" <?= $this->insVal("branchId") ?>>
+              <input disabled type="text" class="form-control" id="branch-input" <?= $this->insVal("branchName") ?>>
             <?php } ?>
           </div>
           <div class="d-flex justify-content-end">

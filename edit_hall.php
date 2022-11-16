@@ -15,9 +15,11 @@ try {
   $hid = $_GET["id"];
 
   $query = $db->prepare(
-    "SELECT letter, branchId
-     FROM `halls`
-     WHERE id=?"
+    "SELECT halls.letter,
+            branches.name AS branchName
+     FROM   `halls`, `branches`
+     WHERE  branchId = branches.id
+     AND    halls.id = ?"
   );
   $query->execute([
     $hid
