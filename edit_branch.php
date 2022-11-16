@@ -1,7 +1,7 @@
 <?php
 
 require("util/connection.php");
-require("templates/edit_branch.php");
+require("templates/add_edit_branch.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // TODO
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // TODO: Ensure id exists
     $result = $query->fetch();
 
-    $page = new editBranchLayout();
+    $page = new addEditBranchLayout();
     $page->setValues($result);
     $page->doc();
   } catch (PDOException $e) {
