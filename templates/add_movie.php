@@ -24,7 +24,7 @@ class addMovieLayout extends masterLayout
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="duration-input">Duration</label>
-                <input class="form-control" type="time" max="02:00" min="00:00" name="duration" id="duration-input">
+                <input class="form-control" type="time" max="03:00" min="00:00" name="duration" id="duration-input">
               </div>
               <div class="form-group col-md-6">
                 <label for="lang-input">Language</label>
@@ -39,17 +39,11 @@ class addMovieLayout extends masterLayout
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="rating-input">Rating</label>
-                <input class="form-control" type="number" max="5.0" min="0.0" step="0.1" name="rating" id="rating-input">
+                <input class="form-control" type="number" max="10.0" min="0.0" step="0.1" name="rating" id="rating-input">
               </div>
 
-              <!-- <label for="">Rating</label>
-          <div class="form-group row px-3">
-            <input class="form-control-range col-10" type="range" name="" id="rating-input" max="5" min="0" step="0.1">
-            <div id="rating-val" class="col text-center">2.5</div>
-          </div> -->
               <div class="form-group col-md-6">
                 <label for="genre-input">Genre</label>
-                <!-- <input class="col form-control" type="text" name="genre" > -->
                 <select class="form-control" name="genre" id="genre-input">
                   <?php
                   foreach (self::$genres as $genre) {
@@ -63,10 +57,6 @@ class addMovieLayout extends masterLayout
               <label for="movie-desc">Description</label>
               <textarea class="form-control" name="desc" id="movie-desc" cols="30" rows="10"></textarea>
             </div>
-            <!-- <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
-              <label class="custom-file-label" for="customFile">Choose file</label>
-            </div> -->
             <div class="form-group custom-file mb-3">
               <!-- MAX_FILE_SIZE must precede the file input field -->
               <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
@@ -96,21 +86,11 @@ class addMovieLayout extends masterLayout
 
         nextSibling.innerText = fileName
       }
-      // $(document).ready(() => [...document.querySelectorAll('.custom-file-input')].forEach(element => {
-      //   setFilename(element);
-      // }));
       $(document).ready(() => {
-        // [...$('.custom-file-input')].forEach(
-        //   element => setFilename(element)
-        // )
         $('.custom-file-input')
           .change(e => setFilename(e.target))
           .change()
       });
-      // document.querySelector('.custom-file-input').addEventListener('change', function(e) {
-      //   // var fileName = document.getElementById("poster-input").files[0].name;
-      //   setFilename(e.target)
-      // })
     </script>
 <?php
   }

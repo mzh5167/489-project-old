@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
 
       // Ensure type is valid
-      $accepted_types = ["image/png", "image/jpeg"];
+      $accepted_types = ["image/jpeg"];
       $type = mime_content_type($file['tmp_name']);
       if (!in_array($type, $accepted_types)) {
         die("Please upload an image not '$type'");
