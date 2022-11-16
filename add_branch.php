@@ -1,7 +1,7 @@
 <?php
 
 require("util/connection.php");
-require("templates/add_branch.php");
+require("templates/add_edit_branch.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   try {
@@ -14,12 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $_POST["addr"]
     ]);
 
-    $page = new addBranchLayout();
+    $page = new addEditBranchLayout();
     $page->alert_message = $status ? "Branch was added successfully" : "Failed to add branch";
     $page->doc();
   } catch (PDOException $e) {
     die($e->getMessage());
   }
 } else {
-  $page = (new addBranchLayout())->doc();
+  $page = (new addEditBranchLayout())->doc();
 }
