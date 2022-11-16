@@ -1,6 +1,7 @@
 <?php
 
-function isValidEmail(string $email) : bool {
+function isValidEmail(string $email): bool
+{
   return (filter_var($email, FILTER_VALIDATE_EMAIL) !== false);
 }
 
@@ -9,14 +10,20 @@ function isValidEmail(string $email) : bool {
  * 
  * @param string &$message   the error message specifying the issue with the password
  */
-function isValidPassword(string $password, string &$message = null) : bool {
+function isValidPassword(string $password, string &$message = null): bool
+{
   if (strlen($password) < 8) {
     $message = "Password must 8 characters or longer";
     return false;
   }
-  if (preg_match("/([^a-z0-9\-_])/i", $password, $matches)) {
-    // $message = "Password must only contain English letters, numbers, -, or _";
-    $message = "Character " . htmlspecialchars($matches[1]) . " is not allowed";
+  if (preg_match_all("/[^a-z0-9\-_]/i", $password, $matches, PREG_SET_ORDER)) {
+    $out = "";
+    foreach ($matches as list($char)) {
+      if (strpos($out, $char) !== false) {
+      } else
+        $out .= " " . $char;
+    }
+    $message = "Character(s) " . htmlspecialchars($out) . " are not allowed";
     return false;
   }
   if (!preg_match("/[a-z]/i", $password)) {

@@ -7,6 +7,8 @@ $tests = [
   ["0mqudwjqimqw", false],
   ["cmqu%dwjqimqwocmq^", false],
   ["cmqudwjqimqwocmq^", false],
+  ["cmq^udwjqimqwocmq^", false],
+  ["cmq^udwj%%%qwocmq^", false],
   ["cmqudwjq", false],
   ["cmqudwjq214789", true],
   ["cm-dwjq214___", true],
