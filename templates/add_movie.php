@@ -3,12 +3,6 @@ require("master.php");
 
 class addMovieLayout extends masterLayout
 {
-  public static $genres = [
-    "drama" => "drama",
-    "action" => "action",
-    "anim" => "animation",
-  ];
-
   function main()
   {
 ?>
@@ -58,8 +52,8 @@ class addMovieLayout extends masterLayout
                 <!-- <input class="col form-control" type="text" name="genre" > -->
                 <select class="form-control" name="genre" id="genre-input">
                   <?php
-                  foreach (self::$genres as $key => $val) {
-                    echo "<option value='$key'>$val</option>";
+                  foreach (self::$genres as $genre) {
+                    echo "<option value='$genre'> " . ucfirst($genre) . " </option>";
                   }
                   ?>
                 </select>
