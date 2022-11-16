@@ -146,5 +146,32 @@ abstract class masterLayout
     </html>
 <?php
   }
+
+  public static $genres = [
+    'animation',
+    'comedy',
+    'crime',
+    'drama',
+    'fantasy',
+    'horror',
+    'romance',
+    'sci-fi',
+    'thriller',
+    'superhero',
+    'adventure',
+  ];
+  // public static $genres = [
+  //   'anim'    => 'animation',
+  //   'comedy'  => 'comedy',
+  //   'crime'   => 'crime',
+  //   'drama'   => 'drama',
+  //   'fntsy'   => 'fantasy',
+  //   'hrr'     => 'horror',
+  //   'rmnce'   => 'romance',
+  //   'sci-fi'  => 'sci-fi',
+  //   'thrlr'   => 'thriller',
+  //   'shero'   => 'superhero',
+  //   'adv'     => 'adventure',
+  // ];
 }
 ?>
