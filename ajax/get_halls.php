@@ -1,6 +1,6 @@
 <?php
 
-require "util/connection.php";
+require "../util/connection.php";
 
 if (!isset($_GET["bid"]))
   die();

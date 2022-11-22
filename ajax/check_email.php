@@ -3,8 +3,8 @@
  * Checks if the given email already exists in the database
  */
 
-require("util/queries.php");
-require("util/connection.php");
+require "../util/queries.php";
+require "../util/connection.php";
 
 if (!isset($_GET["q"]))
   die();

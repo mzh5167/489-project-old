@@ -85,7 +85,7 @@ class addTimeSlotLayout extends masterLayout
       $(document).ready(() => {
         $("#branch-input").change((e) => {
           bid = e.target.value
-          $.getJSON(`get_halls.php?bid=${bid}`)
+          $.getJSON(`ajax/get_halls.php?bid=${bid}`)
             .done((data) => {
               // Ensure halls exist
               if (data.length === 0) {

@@ -44,7 +44,7 @@ class browseTimeSlotsLayout extends masterLayout
       $(document).ready(() => {
         $("#movie-input").change((e) => {
           mid = e.target.value
-          $.getJSON(`get_time_slots.php?mid=${mid}`)
+          $.getJSON(`ajax/get_time_slots.php?mid=${mid}`)
             .done((data) => {
               if (data.length === 0) {
                 // TODO: add message to be displayed in case no time slot exists
