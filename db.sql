@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 09, 2022 at 04:45 PM
+-- Generation Time: Nov 23, 2022 at 05:54 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -56,7 +56,8 @@ CREATE TABLE `branches` (
 
 INSERT INTO `branches` (`id`, `name`, `addr`) VALUES
 (1, 'City centre cinema', 'city centre mall'),
-(2, 'Juffair Cinema', 'Juffair Oasis mall');
+(2, 'Juffair Cinema', 'Juffair Oasis mall'),
+(3, 'tmp', 'Tmp');
 
 -- --------------------------------------------------------
 
@@ -108,7 +109,7 @@ CREATE TABLE `movies` (
   `duration` int(11) NOT NULL,
   `rating` decimal(2,1) NOT NULL,
   `genre` enum('action','animation','comedy','crime','drama','fantasy','horror','romance','sci-fi','thriller','superhero','adventure') NOT NULL,
-  `desc` varchar(255) NOT NULL
+  `desc` varchar(511) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -119,7 +120,11 @@ INSERT INTO `movies` (`id`, `title`, `releaseYear`, `lang`, `duration`, `rating`
 (1, 'btmn', 2014, 'en', 90, '1.3', 'drama', 'descccc'),
 (2, 'btmn', 2014, 'en', 90, '1.3', 'drama', 'descccc'),
 (29, 'hkjl', 2017, 'en', 99, '2.0', 'drama', 'jkjj'),
-(30, 'uywerui', 2034, 'en', 99, '2.0', 'drama', 'deskjl');
+(30, 'uywerui', 2034, 'en', 99, '2.0', 'drama', 'deskjl'),
+(31, 'LYLE, LYLE, CROCODILE', 2014, 'en', 106, '2.1', 'adventure', 'Follows the title reptile who lives in a house on East 88th Street in New York City. Lyle enjoys helping the Primm family with everyday chores and playing with the neighborhood kids but one neighbor insists that Lyle belongs in a zoo. Mr. Grumps and his cat, Loretta, do not like crocodiles, and Lyle tries to prove that he is not as bad as others might first think.'),
+(32, 'ONE PIECE FILM: RED', 2013, 'en', 115, '7.3', 'animation', 'The story is set on the “Island of Music” Elegia, where Uta, the world’s greatest diva, holds her first ever live concert and reveals herself to the public. The Straw Hats, pirates, Marines and fans from across the world gather to enjoy Uta’s voice, which has been described as “otherworldly”. However, the event begins with the shocking revelation that Uta is the daughter of Shanks.\r\n\r\n'),
+(33, 'BLACK PANTHER: WAKANDA FOREVER', 2007, 'en', 161, '8.5', 'adventure', 'In Marvel Studios’ Black Panther: Wakanda Forever, Queen Ramonda (Angela Bassett), Shuri (Letitia Wright), M’baku (Winston Duke), Okoye (Danai Gurira) and the Dora Milaje (including Florence Kasumba), fight to protect their nation from intervening world powers in the wake of King T’Challa’s death.\r\n\r\n'),
+(34, 'THE MENU', 2002, 'en', 107, '7.4', 'romance', 'A young couple travels to a remote island to eat at an exclusive restaurant where the chef has prepared a lavish menu, with some shocking surprises.');
 
 -- --------------------------------------------------------
 
@@ -130,9 +135,19 @@ INSERT INTO `movies` (`id`, `title`, `releaseYear`, `lang`, `duration`, `rating`
 CREATE TABLE `timeSlots` (
   `id` int(11) NOT NULL,
   `time` datetime NOT NULL,
-  `branchId` int(11) NOT NULL,
+  `hallId` int(11) NOT NULL,
   `movieId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `timeSlots`
+--
+
+INSERT INTO `timeSlots` (`id`, `time`, `hallId`, `movieId`) VALUES
+(1, '2021-01-03 14:00:00', 4, 32),
+(2, '2021-12-15 14:00:00', 5, 31),
+(3, '2001-04-04 14:00:00', 4, 2),
+(4, '2001-04-04 14:00:00', 4, 2);
 
 -- --------------------------------------------------------
 
@@ -202,8 +217,8 @@ ALTER TABLE `movies`
 --
 ALTER TABLE `timeSlots`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_timeslots_branchid` (`branchId`),
-  ADD KEY `fk_timeslots_movieid` (`movieId`);
+  ADD KEY `fk_timeslots_movieid` (`movieId`),
+  ADD KEY `fk_timeslots_hallid` (`hallId`);
 
 --
 -- Indexes for table `users`
@@ -225,7 +240,7 @@ ALTER TABLE `bookings`
 -- AUTO_INCREMENT for table `branches`
 --
 ALTER TABLE `branches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `halls`
@@ -243,13 +258,13 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `timeSlots`
 --
 ALTER TABLE `timeSlots`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -278,7 +293,7 @@ ALTER TABLE `halls`
 -- Constraints for table `timeSlots`
 --
 ALTER TABLE `timeSlots`
-  ADD CONSTRAINT `fk_timeslots_branchid` FOREIGN KEY (`branchId`) REFERENCES `branches` (`id`),
+  ADD CONSTRAINT `fk_timeslots_hallid` FOREIGN KEY (`hallId`) REFERENCES `halls` (`id`),
   ADD CONSTRAINT `fk_timeslots_movieid` FOREIGN KEY (`movieId`) REFERENCES `movies` (`id`);
 COMMIT;
 
