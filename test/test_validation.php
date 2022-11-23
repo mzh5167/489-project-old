@@ -1,6 +1,6 @@
 <?php
 
-include "util/validation.php";
+require "../util/validation.php";
 
 $tests = [
   ["fcme", false],
