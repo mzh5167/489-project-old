@@ -38,7 +38,7 @@ class addTimeSlotLayout extends masterLayout
               <div class="form-group col-md-6">
                 <label for="branch-input">Branch</label>
                 <?php if (isset($this->branches)) { ?>
-                  <select class="form-control" id="branch-input">
+                  <select class="form-control" id="branch-input" data-ajax="fetch-halls">
                     <option hidden disabled selected value> -- Choose a branch -- </option>
                     <?php foreach ($this->branches as $branch) { ?>
                       <option value="<?= $branch['id'] ?>">

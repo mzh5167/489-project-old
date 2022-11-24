@@ -16,7 +16,7 @@ class browseTimeSlotsLayout extends masterLayout
     <div class="form-group row">
       <label for="movie-input" class="col-form-label col-md-3"> Movie </label>
       <div class="col-md-9">
-        <select class="form-control" id="movie-input">
+        <select class="form-control" id="movie-input" data-ajax="fetch-time-slots">
           <option hidden disabled selected value> -- Choose a movie -- </option>
           <?php foreach ($this->movies as $movie) { ?>
             <option value="<?= $movie['id'] ?>">
