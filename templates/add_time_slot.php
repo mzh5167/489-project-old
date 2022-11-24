@@ -76,42 +76,5 @@ class addTimeSlotLayout extends masterLayout
 
   <?php
   }
-
-  function script()
-  {
-  ?>
-    <script>
-      // TODO: move javascript into a separate file
-      $(document).ready(() => {
-        $("#branch-input").change((e) => {
-          bid = e.target.value
-          $.getJSON(`ajax/get_halls.php?bid=${bid}`)
-            .done((data) => {
-              // Ensure halls exist
-              if (data.length === 0) {
-                $("#hall-input")
-                  // Disable halls input
-                  .attr("disabled", "disabled")
-                  .empty()
-                  .append("<option hidden disabled selected value> -- No halls exist -- </option>")
-                return
-              }
-              // Convert data to options
-              content = data.map((data) => {
-                return `<option value="${data.id}"> ${data.letter} </option>`;
-              })
-              content.unshift("<option hidden disabled selected value> -- Choose a hall -- </option>")
-              $("#hall-input")
-                // Enable halls input
-                .removeAttr("disabled")
-                // Add options
-                .empty()
-                .append(content)
-            })
-        })
-      })
-    </script>
-<?php
-  }
 }
 ?>

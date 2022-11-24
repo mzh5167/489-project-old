@@ -74,25 +74,5 @@ class addMovieLayout extends masterLayout
 
   <?php
   }
-
-  function script()
-  {
-  ?>
-    <script>
-      function setFilename(elem) {
-        if (elem.files.length == 0) return
-        var fileName = elem.files[0].name;
-        var nextSibling = elem.nextElementSibling
-
-        nextSibling.innerText = fileName
-      }
-      $(document).ready(() => {
-        $('.custom-file-input')
-          .change(e => setFilename(e.target))
-          .change()
-      });
-    </script>
-<?php
-  }
 }
 ?>
